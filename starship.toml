@@ -1,0 +1,31 @@
+format = """
+[](#D60270)\
+$username\
+[](bg:#9B4F96 fg:#D60270)\
+$directory\
+[](fg:#9B4F96 bg:#0038A8)\
+$git_branch\
+[ ](fg:#0038A8)\
+"""
+
+add_newline = false
+
+[username]
+show_always = true
+style_user = "bg:#D60270"
+style_root = "bg:#D60270"
+format = '[λ ]($style)'
+disabled = false
+
+[directory]
+style = "bg:#9B4F96"
+format = "[ $path ]($style)"
+truncation_length = 3
+
+[directory.substitutions]
+# "Documents" = "󰈙 "
+
+[git_branch]
+symbol = ""
+style = "bg:#0038A8"
+format = '[ $symbol $branch ]($style)'
