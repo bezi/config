@@ -1,24 +1,26 @@
+palette = "customColors"
+
 format = """
-[](#D60270)\
+[](color1)\
 $username\
-[](bg:#9B4F96 fg:#D60270)\
+[](bg:color2 fg:color1)\
 $directory\
-[](fg:#9B4F96 bg:#0038A8)\
+[](fg:color2 bg:color3)\
 $git_branch\
-[ ](fg:#0038A8)\
+[ ](fg:color3)\
 """
 
 add_newline = false
 
 [username]
 show_always = true
-style_user = "bg:#D60270"
-style_root = "bg:#D60270"
+style_user = "bg:color1 text1"
+style_root = "bg:color1 text1"
 format = '[λ ]($style)'
 disabled = false
 
 [directory]
-style = "bg:#9B4F96"
+style = "bg:color2 text2"
 format = "[ $path ]($style)"
 truncation_length = 3
 
@@ -27,5 +29,12 @@ truncation_length = 3
 
 [git_branch]
 symbol = ""
-style = "bg:#0038A8"
+style = "bg:color3 text2"
 format = '[ $symbol $branch ]($style)'
+
+[palettes.customColors]
+color1 = '#d20f39'
+color2 = '#ca9ee6'
+color3 = '#6084ce'
+text1 = 'white'
+text2 = 'black'
