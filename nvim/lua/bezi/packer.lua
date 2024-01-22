@@ -4,17 +4,28 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+    -- Nicely integrate with Tmux
     use 'christoomey/vim-tmux-navigator'
-    use 'tpope/vim-surround'
+    -- Auto-toggle comments
     use 'tpope/vim-commentary'
+    -- Auto-close quotes and parens
     use 'Raimondi/delimitMate'
+    -- Lets me use surrounds as a vim motion (di( - delete in separator)
+    use 'tpope/vim-surround'
 
+    -- Finder plugin
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
+        'nvim-telescope/telescope.nvim', tag = '0.1.3',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-    use 'kelly-lin/telescope-ag'
 
+    -- Helper for telescope sorting
+    use { 
+        'nvim-telescope/telescope-fzf-native.nvim', 
+        run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+    }
+
+    -- Color scheme
     use {
         "rebelot/kanagawa.nvim",
         config = function() vim.cmd.colorscheme('kanagawa-dragon') end
@@ -24,8 +35,11 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
+
+    -- Rainbow parentheses.  They fill me with joy.
     use 'p00f/nvim-ts-rainbow'
 
+    -- LSP Support
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
@@ -47,5 +61,17 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- Justfile syntax hilighting
     use 'vmchale/just-vim'
+
+    -- Run linters
+    use 'mfussenegger/nvim-lint'
+
+    -- Autoformatting
+    use {
+        "stevearc/conform.nvim",
+        config = function()
+            require("conform").setup()
+        end,
+    }
 end)
