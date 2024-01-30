@@ -2,6 +2,8 @@ require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "ruff_fix", "ruff_format", "black" },
+		html = { { "prettierd", "prettier" } },
+		css = { { "prettierd", "prettier" } },
 		javascript = { { "prettierd", "prettier" } },
 		typescript = { { "prettierd", "prettier" } },
 		javascriptreact = { { "prettierd", "prettier" } },
