@@ -1,5 +1,5 @@
 vim.opt.nu = true
-vim.opt.colorcolumn = '81'
+vim.opt.colorcolumn = "81"
 vim.opt.termguicolors = true
 
 vim.opt.tabstop = 4
@@ -40,28 +40,28 @@ vim.opt.hlsearch = true
 -- Automatically toggle relative numbers only for the buffer you're in
 vim.opt.relativenumber = true
 local relative_number_group = vim.api.nvim_create_augroup("beziRelative", {})
-vim.api.nvim_create_autocmd('WinEnter', {
-    pattern = '*',
-    callback = function()
-        vim.opt.relativenumber = true
-    end,
-    group = relative_number_group,
+vim.api.nvim_create_autocmd("WinEnter", {
+	pattern = "*",
+	callback = function()
+		vim.opt.relativenumber = true
+	end,
+	group = relative_number_group,
 })
 
-vim.api.nvim_create_autocmd('WinLeave', {
-    pattern = '*',
-    callback = function()
-        vim.opt.relativenumber = false
-    end,
-    group = relative_number_group,
+vim.api.nvim_create_autocmd("WinLeave", {
+	pattern = "*",
+	callback = function()
+		vim.opt.relativenumber = false
+	end,
+	group = relative_number_group,
 })
 
 -- Save on focus loss
 local auto_save_group = vim.api.nvim_create_augroup("beziRelative", {})
-vim.api.nvim_create_autocmd('FocusLost', {
-    pattern = '*',
-    callback = function()
-        vim.cmd("wa")
-    end,
-    group = auto_save_group,
+vim.api.nvim_create_autocmd("FocusLost", {
+	pattern = "*",
+	callback = function()
+		vim.cmd("wa")
+	end,
+	group = auto_save_group,
 })
