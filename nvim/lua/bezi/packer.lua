@@ -39,9 +39,6 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 
-	-- Rainbow parentheses.  They fill me with joy.
-	use("p00f/nvim-ts-rainbow")
-
 	-- LSP Support
 	use({
 		"VonHeikemen/lsp-zero.nvim",
