@@ -8,6 +8,7 @@ require("conform").setup({
 		typescript = { { "prettierd", "prettier" } },
 		javascriptreact = { { "prettierd", "prettier" } },
 		typescriptreact = { { "prettierd", "prettier" } },
+		json = { { "prettierd", "prettier" } },
 		["*"] = { "trim_whitespace", "trim_newlines" },
 	},
 	format_on_save = {
