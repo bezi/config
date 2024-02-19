@@ -5,5 +5,6 @@
 #     source "$HOME/.config/bashrc";
 # fi
 
-EDITOR=nvim
+export EDITOR=nvim
 alias glog='git log --pretty=oneline --graph --decorate --abbrev-commit --all';
+export ESLINT_USE_FLAT_CONFIG=true
