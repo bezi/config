@@ -19,7 +19,7 @@ git checkout --track origin/master
 
 3. Install and configure [Starship](https://starship.rs/):
 ```sh
-curl -sS https://starship.rs/install.sh | sh
+brew install starship
 
 # Add the following to the end of ~/.bashrc:
 eval "$(starship init bash)"

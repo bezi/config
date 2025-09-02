@@ -61,9 +61,6 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	-- Justfile syntax hilighting
-	use("vmchale/just-vim")
-
 	-- Run linters
 	use("mfussenegger/nvim-lint")
 
