@@ -26,3 +26,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Better behaviour for joining lines, keep cursor the same
 vim.keymap.set("n", "J", "mzJ`z")
+
+-- Trying something new with splits: make them match tmux.
+vim.keymap.set("n", "<leader>\\", ":vs<CR>")
+vim.keymap.set("n", "<leader>-", ":sp<CR>")
