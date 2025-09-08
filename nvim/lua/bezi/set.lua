@@ -37,6 +37,9 @@ vim.opt.incsearch = true
 vim.opt.showmatch = true
 vim.opt.hlsearch = true
 
+-- Use system clipboard
+vim.opt.clipboard = "unnamedplus"
+
 -- Automatically toggle relative numbers only for the buffer you're in
 vim.opt.relativenumber = true
 local relative_number_group = vim.api.nvim_create_augroup("beziRelative", {})
@@ -56,12 +59,12 @@ vim.api.nvim_create_autocmd("WinLeave", {
 	group = relative_number_group,
 })
 
--- Save on focus loss
 local auto_save_group = vim.api.nvim_create_augroup("beziRelative", {})
 vim.api.nvim_create_autocmd("FocusLost", {
-	pattern = "*",
-	callback = function()
-		vim.cmd("wa")
-	end,
-	group = auto_save_group,
+  group = auto_save_group,
+  callback = function()
+    if vim.api.nvim_buf_get_name(0) ~= "" then
+      vim.cmd("silent write")
+    end
+  end,
 })

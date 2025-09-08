@@ -6,6 +6,7 @@ $username\
 [](bg:color2 fg:color1)\
 $directory\
 [](fg:color2 bg:color3)\
+$aws\
 $git_branch\
 [ ](fg:color3)\
 """
@@ -38,3 +39,10 @@ color2 = '#ca9ee6'
 color3 = '#6084ce'
 text1 = '#c0c4c1'
 text2 = '#181616'
+
+[aws]
+# e.g. "  dev"
+format = '[ $symbol ($profile) -]($style)'
+symbol = ''
+style = 'bg:color3 text2'
+disabled = false
