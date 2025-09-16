@@ -59,12 +59,16 @@ vim.api.nvim_create_autocmd("WinLeave", {
 	group = relative_number_group,
 })
 
-local auto_save_group = vim.api.nvim_create_augroup("beziRelative", {})
+local auto_save_group = vim.api.nvim_create_augroup("beziAutoSave", {})
 vim.api.nvim_create_autocmd("FocusLost", {
-  group = auto_save_group,
-  callback = function()
-    if vim.api.nvim_buf_get_name(0) ~= "" then
-      vim.cmd("silent write")
-    end
-  end,
+	group = auto_save_group,
+	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		local name = vim.api.nvim_buf_get_name(buf)
+
+		-- skip unnamed, readonly, or unmodifiable buffers
+		if name ~= "" and vim.bo[buf].modifiable and not vim.bo[buf].readonly then
+			vim.cmd("silent write")
+		end
+	end,
 })
