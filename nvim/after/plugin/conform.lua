@@ -1,14 +1,14 @@
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "ruff_fix", "ruff_format", "black" },
-		html = { { "prettierd", "prettier" } },
-		css = { { "prettierd", "prettier" } },
-		javascript = { { "prettierd", "prettier" } },
-		typescript = { { "prettierd", "prettier" } },
-		javascriptreact = { { "prettierd", "prettier" } },
-		typescriptreact = { { "prettierd", "prettier" } },
-		json = { { "prettierd", "prettier" } },
+		python = { "ruff_fix", "ruff_format" },
+		html = { "prettierd", "prettier", stop_after_first = true },
+		css = { "prettierd", "prettier", stop_after_frist = true },
+		javascript = { "prettierd", "prettier", stop_after_first = true },
+		typescript = { "prettierd", "prettier", stop_after_first = true },
+		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+		json = { "prettierd", "prettier", stop_after_first = true },
 		["*"] = { "trim_whitespace", "trim_newlines" },
 	},
 	format_on_save = {
