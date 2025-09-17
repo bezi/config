@@ -30,3 +30,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Trying something new with splits: make them match tmux.
 vim.keymap.set("n", "<leader>\\", ":vs<CR>")
 vim.keymap.set("n", "<leader>-", ":sp<CR>")
+vim.cmd.cnoreabbrev("vs <c-r>=\"echo '🚫 Use <leader>\\\\ instead'\"<CR>")
+vim.cmd.cnoreabbrev("vsplit <c-r>=\"echo '🚫 Use <leader>\\\\ instead'\"<CR>")
+vim.cmd.cnoreabbrev("sp <c-r>=\"echo '🚫 Use <leader>- instead'\"<CR>")
+vim.cmd.cnoreabbrev("split <c-r>=\"echo '🚫 Use <leader>- instead'\"<CR>")
