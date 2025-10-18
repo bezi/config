@@ -40,6 +40,10 @@ vim.opt.hlsearch = true
 -- Use system clipboard
 vim.opt.clipboard = "unnamedplus"
 
+-- Make Vim split behavior match tmux
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
 -- Automatically toggle relative numbers only for the buffer you're in
 vim.opt.relativenumber = true
 local relative_number_group = vim.api.nvim_create_augroup("beziRelative", {})

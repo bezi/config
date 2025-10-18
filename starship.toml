@@ -11,6 +11,13 @@ $git_branch\
 [ ](fg:color3)\
 """
 
+# Uncomment for demos
+# format = """
+# [](color1)\
+# $username\
+# [ ](color1)\
+# """
+
 add_newline = false
 
 [username]

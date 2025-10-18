@@ -34,3 +34,7 @@ vim.cmd.cnoreabbrev("vs <c-r>=\"echo '🚫 Use <leader>\\\\ instead'\"<CR>")
 vim.cmd.cnoreabbrev("vsplit <c-r>=\"echo '🚫 Use <leader>\\\\ instead'\"<CR>")
 vim.cmd.cnoreabbrev("sp <c-r>=\"echo '🚫 Use <leader>- instead'\"<CR>")
 vim.cmd.cnoreabbrev("split <c-r>=\"echo '🚫 Use <leader>- instead'\"<CR>")
+
+-- Shitposting
+vim.keymap.set("n", "<leader>shrug", "i¯\\_(ツ)_/¯<Esc>", { noremap = true, silent = true })
+vim.keymap.set("i", "<leader>shrug", "¯\\_(ツ)_/¯", { noremap = true, silent = true })
