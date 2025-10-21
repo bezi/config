@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd("FocusLost", {
 		local name = vim.api.nvim_buf_get_name(buf)
 
 		-- skip unnamed, readonly, or unmodifiable buffers
-		if name ~= "" and vim.bo[buf].modifiable and not vim.bo[buf].readonly then
+		if name ~= "" and vim.bo[buf].modifiable and not vim.bo[buf].readonly and vim.bo[buf].modified then
 			vim.cmd("silent write")
 		end
 	end,
