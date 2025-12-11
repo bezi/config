@@ -13,3 +13,5 @@ export PYTHONPYCACHEPREFIX=/tmp/pycaches
 export GIT_EXTERNAL_DIFF=difft
 export HOMEBREW_NO_ENV_HINTS=1
 alias tmx='tmux attach -t bezi || tmux new -s bezi'
+
+
