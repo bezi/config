@@ -9,6 +9,7 @@ require("conform").setup({
 		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		json = { "prettierd", "prettier", stop_after_first = true },
+		rust = { "rustfmt" },
 		["*"] = { "trim_whitespace", "trim_newlines" },
 	},
 	format_on_save = {

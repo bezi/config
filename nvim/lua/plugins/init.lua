@@ -95,7 +95,7 @@ return {
 				capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 			end
 
-			local servers = { "pyright", "vtsls" }
+			local servers = { "pyright", "vtsls", "rust_analyzer" }
 			for _, lsp in ipairs(servers) do
 				vim.lsp.config(lsp, {
 					on_attach = on_attach,
