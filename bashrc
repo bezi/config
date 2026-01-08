@@ -7,7 +7,7 @@
 
 alias vim="nvim"
 export EDITOR=nvim
-alias glog='git log --pretty=oneline --graph --decorate --abbrev-commit --all';
+alias glog='git log --pretty=oneline --graph --decorate --abbrev-commit --branches --tags';
 alias gittree='git ls-files | tree --fromfile -C -a'
 export ESLINT_USE_FLAT_CONFIG=true
 export PYTHONPYCACHEPREFIX=/tmp/pycaches
