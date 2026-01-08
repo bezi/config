@@ -5,6 +5,7 @@
 #     source "$HOME/.config/bashrc";
 # fi
 
+alias vim="nvim"
 export EDITOR=nvim
 alias glog='git log --pretty=oneline --graph --decorate --abbrev-commit --all';
 alias gittree='git ls-files | tree --fromfile -C -a'
