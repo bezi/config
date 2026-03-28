@@ -35,14 +35,12 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 Then, just start tmux and run `prefix + I` to install all the plugins.
 
-5. Install Neovim on your local system, then install [Packer](https://github.com/wbthomason/packer.nvim):
+5. Install Neovim on your local system, then just open it:
 ```sh
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-cd ~/.config/nvim/
-nvim lua/bezi/packer.lua
+nvim
 ```
 
-Once the packer file is loaded, run `:source %` in the window, then `:PackerInstall`.  I then quit and repeat, as the initial install can get a little screwy.
+Plugins are managed with [lazy.nvim](https://github.com/folke/lazy.nvim), which auto-bootstraps on first launch.
 
 6. Make sure your shell config loads `bashrc` in this repo for aliases.
 
