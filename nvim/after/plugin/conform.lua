@@ -10,6 +10,7 @@ require("conform").setup({
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		json = { "prettierd", "prettier", stop_after_first = true },
 		rust = { "rustfmt" },
+		nix = { "nixfmt" },
 		["*"] = { "trim_whitespace", "trim_newlines" },
 	},
 	format_on_save = {
