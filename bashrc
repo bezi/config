@@ -16,3 +16,4 @@ export HOMEBREW_NO_ENV_HINTS=1
 alias tmx='tmux attach -t bezi || tmux new -s bezi'
 alias tmx-name='(){ tmux rename-window "$1" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off; }'
 alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
+alias nrs='sudo nixos-rebuild switch --flake /home/bezi/.config/nixos'
