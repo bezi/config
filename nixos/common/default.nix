@@ -11,6 +11,20 @@ let
   };
 in
 {
+  # 4GB swapfile to survive nixos-rebuild on low-RAM boxes
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 4096; # MB
+    }
+  ];
+
+  # Limit Nix build parallelism to avoid OOM
+  nix.settings = {
+    max-jobs = 2;
+    cores = 2;
+  };
+
   services.openssh = {
     enable = true;
     settings = {
@@ -56,6 +70,11 @@ in
     "nix-command"
     "flakes"
   ];
+
+  # nrs = nixos-rebuild switch
+  environment.shellAliases = {
+    nrs = "sudo nixos-rebuild switch --flake /home/bezi/.config/nixos";
+  };
 
   nix.gc = {
     automatic = true;
