@@ -50,7 +50,6 @@ in
     cargo
     nil
     nixfmt-rfc-style
-    pnpm
   ];
 
   nix.settings.experimental-features = [

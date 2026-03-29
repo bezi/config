@@ -1,7 +1,15 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  environment.systemPackages = with pkgs; [
+    # k9s
+    pnpm
+  ];
+
   networking.hostName = "homelab-bastion";
-  networking.firewall.allowedTCPPorts = [ 6443 10250 ];
+  networking.firewall.allowedTCPPorts = [
+    6443
+    10250
+  ];
   networking.firewall.allowedUDPPorts = [ 8472 ];
 
   services.k3s = {
@@ -20,7 +28,12 @@
   system.autoUpgrade = {
     enable = true;
     flake = "/home/bezi/.config/nixos#homelab-bastion";
-    flags = [ "--update-input" "nixpkgs" "--update-input" "nixpkgs-unstable" ];
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "--update-input"
+      "nixpkgs-unstable"
+    ];
     dates = "Tue *-*-* 03:00:00";
     allowReboot = true;
   };
