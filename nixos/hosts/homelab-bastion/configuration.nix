@@ -22,6 +22,22 @@
     ];
   };
 
+  systemd.services.k3s-kubeconfig = {
+    description = "Copy k3s kubeconfig for bezi user";
+    after = [ "k3s.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      mkdir -p /home/bezi/.kube
+      cp /etc/rancher/k3s/k3s.yaml /home/bezi/.kube/config
+      chown bezi:users /home/bezi/.kube/config
+      chmod 600 /home/bezi/.kube/config
+    '';
+  };
+
   nix.settings.flake-registry = "";
   nix.channel.enable = false;
 
