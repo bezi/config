@@ -44,7 +44,16 @@ Plugins are managed with [lazy.nvim](https://github.com/folke/lazy.nvim), which 
 
 6. Make sure your shell config loads `bashrc` in this repo for aliases.
 
-7. Run git setup:
+7. Point SSH at the shared config. Create `~/.ssh/config` with:
+```sh
+# macOS only — add this line:
+UseKeychain yes
+
+# All platforms:
+Include ~/.config/ssh_config
+```
+
+8. Run git setup:
 ```sh
 git config --global user.name "Oscar Bezi"
 git config --global user.email oscar.bezi@gmail.com
