@@ -1,7 +1,18 @@
 { ... }:
 {
   networking.hostName = "homelab-bastion";
-  networking.firewall.allowedTCPPorts = [ ];
+  networking.firewall.allowedTCPPorts = [ 6443 10250 ];
+  networking.firewall.allowedUDPPorts = [ 8472 ];
+
+  services.k3s = {
+    enable = true;
+    role = "server";
+    extraFlags = toString [
+      "--node-ip=10.0.0.2"
+      "--advertise-address=10.0.0.2"
+      "--flannel-iface=enp7s0"
+    ];
+  };
 
   nix.settings.flake-registry = "";
   nix.channel.enable = false;

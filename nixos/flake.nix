@@ -21,6 +21,7 @@
   in {
     nixosConfigurations = {
       homelab-bastion = mkHost "homelab-bastion";
+      homelab-worker-01 = mkHost "homelab-worker-01";
     };
   };
 }

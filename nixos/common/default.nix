@@ -1,6 +1,14 @@
-{ config, pkgs, nixpkgs-unstable, ... }:
+{
+  config,
+  pkgs,
+  nixpkgs-unstable,
+  ...
+}:
 let
-  unstable = import nixpkgs-unstable { system = pkgs.system; config = config.nixpkgs.config; };
+  unstable = import nixpkgs-unstable {
+    system = pkgs.system;
+    config = config.nixpkgs.config;
+  };
 in
 {
   services.openssh = {
@@ -42,7 +50,7 @@ in
     cargo
     nil
     nixfmt-rfc-style
-    nodePackages.pnpm
+    pnpm
   ];
 
   nix.settings.experimental-features = [
