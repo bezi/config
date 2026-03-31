@@ -1,7 +1,7 @@
 { ... }:
 {
   networking.hostName = "homelab-worker-01";
-  networking.firewall.allowedTCPPorts = [ 10250 ];
+  networking.firewall.allowedTCPPorts = [ 9100 10250 ];
   networking.firewall.allowedUDPPorts = [ 8472 ];
 
   services.k3s = {

@@ -15,6 +15,7 @@ in
   networking.hostName = "homelab-bastion";
   networking.firewall.allowedTCPPorts = [
     6443
+    9100  # node-exporter (prometheus scraping)
     10250
   ];
   networking.firewall.allowedUDPPorts = [ 8472 ];
@@ -56,6 +57,11 @@ in
   # Docker for building container images
   virtualisation.docker = {
     enable = true;
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+      flags = [ "--all" ];
+    };
     daemon.settings.insecure-registries = [ "localhost:30500" ];
   };
   users.users.bezi.extraGroups = [ "docker" ];
