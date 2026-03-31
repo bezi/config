@@ -1,12 +1,13 @@
 # Multiplex connections through one socket, 10min persist
 ControlMaster auto
-ControlPath /tmp/%r@%h:%p
+ControlPath ~/.ssh/sockets/%r@%h:%p
 ControlPersist 10m
 
 Host *
     AddKeysToAgent yes
     IdentityFile ~/.ssh/id_ed25519
-    ServerAliveInterval 3
+    ServerAliveInterval 30
+    ServerAliveCountMax 6
 
 Host piplup
     Hostname piplup.bezi.io
