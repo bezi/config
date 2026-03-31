@@ -17,7 +17,7 @@ alias tmx='tmux attach -t bezi || tmux new -s bezi'
 alias tmx-name='(){ tmux rename-window "$1" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off; }'
 alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
 
-# ~/.config git repo health check (debounced pull + dirty/unpushed warning)
+# ~/.config git repo health check (pull debounced daily, warnings every shell)
 () {
   local repo="$HOME/.config"
   local stamp="$repo/.git/last-pull-stamp"
@@ -26,19 +26,16 @@ alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
 
   # Debounced pull: once per day
   if [[ ! -f "$stamp" ]] || (( now - $(cat "$stamp") > one_day )); then
-    { git -C "$repo" pull --ff-only --quiet 2>/dev/null && echo "$now" > "$stamp" } &!
+    echo "$now" > "$stamp"
+    git -C "$repo" pull --ff-only --quiet 2>/dev/null
   fi
 
-  # Warn if dirty or needs pushing
-  local git_status
-  git_status=$(git -C "$repo" status --porcelain 2>/dev/null)
-  if [[ -n "$git_status" ]]; then
-    echo "\e[33m~/.config has uncommitted changes\e[0m"
-  fi
+  # Always warn if dirty or needs pushing
+  local gs
+  gs=$(git -C "$repo" status --porcelain 2>/dev/null)
+  [[ -n "$gs" ]] && echo "\e[33m~/.config has uncommitted changes\e[0m"
 
   local ahead
   ahead=$(git -C "$repo" rev-list --count @{u}..HEAD 2>/dev/null)
-  if [[ -n "$ahead" && "$ahead" -gt 0 ]]; then
-    echo "\e[33m~/.config has $ahead unpushed commit(s)\e[0m"
-  fi
+  [[ -n "$ahead" && "$ahead" -gt 0 ]] && echo "\e[33m~/.config has $ahead unpushed commit(s)\e[0m"
 }
