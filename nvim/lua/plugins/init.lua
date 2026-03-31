@@ -146,4 +146,12 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 	},
+
+	-- Render markdown inline in the buffer
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		ft = { "markdown" },
+		opts = {},
+	},
 }
