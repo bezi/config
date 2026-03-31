@@ -27,7 +27,7 @@
       "--update-input"
       "nixpkgs-unstable"
     ];
-    dates = "Tue *-*-* 03:00:00";
+    dates = "Tue *-*-* 08:00:00"; # 3AM EST / 4AM EDT
     allowReboot = true;
   };
 }
