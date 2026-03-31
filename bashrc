@@ -16,3 +16,29 @@ export HOMEBREW_NO_ENV_HINTS=1
 alias tmx='tmux attach -t bezi || tmux new -s bezi'
 alias tmx-name='(){ tmux rename-window "$1" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off; }'
 alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
+
+# ~/.config git repo health check (debounced pull + dirty/unpushed warning)
+() {
+  local repo="$HOME/.config"
+  local stamp="$repo/.git/last-pull-stamp"
+  local now=$(date +%s)
+  local one_day=86400
+
+  # Debounced pull: once per day
+  if [[ ! -f "$stamp" ]] || (( now - $(cat "$stamp") > one_day )); then
+    { git -C "$repo" pull --ff-only --quiet 2>/dev/null && echo "$now" > "$stamp" } &!
+  fi
+
+  # Warn if dirty or needs pushing
+  local git_status
+  git_status=$(git -C "$repo" status --porcelain 2>/dev/null)
+  if [[ -n "$git_status" ]]; then
+    echo "\e[33m~/.config has uncommitted changes\e[0m"
+  fi
+
+  local ahead
+  ahead=$(git -C "$repo" rev-list --count @{u}..HEAD 2>/dev/null)
+  if [[ -n "$ahead" && "$ahead" -gt 0 ]]; then
+    echo "\e[33m~/.config has $ahead unpushed commit(s)\e[0m"
+  fi
+}
