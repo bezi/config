@@ -64,7 +64,7 @@ return {
 		dependencies = { "mason.nvim" },
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "pyright", "vtsls", "nil_ls" },
+				ensure_installed = { "pyright", "vtsls", "gopls" },
 				automatic_installation = true,
 			})
 		end,
@@ -95,7 +95,7 @@ return {
 				capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 			end
 
-			local servers = { "pyright", "vtsls", "rust_analyzer", "nil_ls" }
+			local servers = { "pyright", "vtsls", "rust_analyzer", "gopls" }
 			for _, lsp in ipairs(servers) do
 				vim.lsp.config(lsp, {
 					on_attach = on_attach,
