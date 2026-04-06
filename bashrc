@@ -25,6 +25,7 @@ alias tmx-name='(){
   tmux rename-window "$name" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off
 }'
 alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
+alias lfg='(){gg && tmx-name "$1" && cld}'
 alias gitclean='git branch --merged origin/main | grep -vE "^\s*(\*|main)" | xargs -n 1 git branch -d';
 
 # ~/.config git repo health check (pull debounced daily, warnings every shell)
