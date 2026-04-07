@@ -32,10 +32,16 @@ return {
 		end,
 	},
 
-	-- treesitter
+	-- treesitter (main branch required for Neovim 0.12+)
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
+		main = "nvim-treesitter",
+		opts = {
+			ensure_install = { "vimdoc", "c", "lua", "vim", "query", "rust" },
+			auto_install = true,
+		},
 	},
 
 	-- Run linters
