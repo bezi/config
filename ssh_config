@@ -16,3 +16,7 @@ Host piplup
 Host homelab
     Hostname homelab-bastion
     User bezi
+
+Host nuc
+    Hostname homelab-onprem-nuc
+    User bezi
