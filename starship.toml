@@ -3,6 +3,7 @@ palette = "customColors"
 format = """
 [](color1)\
 $username\
+$hostname\
 [](bg:color2 fg:color1)\
 $directory\
 [](fg:color2 bg:color3)\
@@ -27,6 +28,16 @@ style_root = "bg:color1 text1"
 format = '[λ ]($style)'
 disabled = false
 
+[hostname]
+ssh_only = false
+style = "bg:color1 text1"
+format = '[$hostname ]($style)'
+aliases =  {
+    "Oscars-MacBook-Pro"= "work"
+}
+disabled = false
+
+
 [directory]
 style = "bg:color2 text2"
 format = "[ $path ]($style)"
@@ -41,14 +52,13 @@ style = "bg:color3 text2"
 format = '[ $symbol $branch ]($style)'
 
 [palettes.customColors]
-color1 = '#d20f39'
-color2 = '#ca9ee6'
-color3 = '#6084ce'
-text1 = '#c0c4c1'
-text2 = '#181616'
+color1 = '#d60270'
+color2 = '#9b4f96'
+color3 = '#0038a8'
+text1 = '#e8e8e8'
+text2 = '#e8e8e8'
 
 [aws]
-# e.g. "  dev"
 format = '[ $symbol ($profile) -]($style)'
 symbol = ''
 style = 'bg:color3 text2'
