@@ -32,8 +32,10 @@ disabled = false
 ssh_only = false
 style = "bg:color1 text1"
 format = '[$hostname ]($style)'
-aliases =  {
-    "Oscars-MacBook-Pro"= "work"
+aliases = {
+    "Oscars-MacBook-Pro" = "work",
+    "bezi-mbp" = "home",
+    "bezi-mbp.local" = "home"
 }
 disabled = false
 
