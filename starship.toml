@@ -3,7 +3,7 @@ palette = "customColors"
 format = """
 [](color1)\
 $username\
-$hostname\
+${custom.hostalias}\
 [](bg:color2 fg:color1)\
 $directory\
 [](fg:color2 bg:color3)\
@@ -28,16 +28,19 @@ style_root = "bg:color1 text1"
 format = '[λ ]($style)'
 disabled = false
 
-[hostname]
-ssh_only = false
+[custom.hostalias]
+description = "Hostname with friendly aliases (starship's hostname module lacks aliases)"
+when = "true"
+command = '''
+case "$(hostname)" in
+  Oscars-MacBook-Pro) echo work ;;
+  bezi-mbp|bezi-mbp.local) echo home ;;
+  homelab-onprem-nuc) echo nuc ;;
+  *) hostname ;;
+esac
+'''
 style = "bg:color1 text1"
-format = '[$hostname ]($style)'
-aliases = {
-    "Oscars-MacBook-Pro" = "work",
-    "bezi-mbp" = "home",
-    "bezi-mbp.local" = "home"
-}
-disabled = false
+format = '[$output ]($style)'
 
 
 [directory]
