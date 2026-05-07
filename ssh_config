@@ -9,10 +9,6 @@ Host *
     ServerAliveInterval 30
     ServerAliveCountMax 6
 
-Host piplup
-    Hostname piplup.bezi.io
-    User bezi
-
 Host homelab
     Hostname homelab-bastion
     User bezi
