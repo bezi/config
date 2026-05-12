@@ -33,7 +33,7 @@ description = "Hostname with friendly aliases (starship's hostname module lacks 
 when = "true"
 command = '''
 case "$(hostname)" in
-  Oscars-MacBook-Pro) echo work ;;
+  Oscars-MBP.localdomain) echo work ;;
   bezi-mbp|bezi-mbp.local) echo home ;;
   homelab-onprem-nuc) echo nuc ;;
   *) hostname ;;
