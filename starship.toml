@@ -32,11 +32,16 @@ disabled = false
 description = "Hostname with friendly aliases (starship's hostname module lacks aliases)"
 when = "true"
 command = '''
-case "$(hostname)" in
-  Oscars-MBP.localdomain) echo work ;;
+if [ "$(uname)" = "Darwin" ]; then
+  name=$(scutil --get LocalHostName)
+else
+  name=$(hostname)
+fi
+case "$name" in
+  Oscars-MacBook-Pro) echo work ;;
   bezi-mbp|bezi-mbp.local) echo home ;;
   homelab-onprem-nuc) echo nuc ;;
-  *) hostname ;;
+  *) echo "$name" ;;
 esac
 '''
 style = "bg:color1 text1"
