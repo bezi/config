@@ -22,11 +22,30 @@ alias tmx-name='(){
   elif [[ "$PWD" == */Nucleus/* || "$PWD" == */Nucleus ]]; then
     name="1-${name}"
   fi
-  tmux rename-window "$name" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off
+  tmux rename-window "$name" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off && tmx-sort
 }'
 alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
 alias lfg='(){gg && tmx-name "$1" && cld}'
+alias lfg2='(){cd ~/github/reframe-systems/Nucleus2 && lfg "$1"}'
+alias lfg3='(){cd ~/github/reframe-systems/Nucleus3 && lfg "$1"}'
+alias lfg4='(){cd ~/github/reframe-systems/Nucleus4 && lfg "$1"}'
+alias lfg5='(){cd ~/github/reframe-systems/Nucleus5 && lfg "$1"}'
+alias lfg6='(){cd ~/github/reframe-systems/Nucleus6 && lfg "$1"}'
+alias lfg7='(){cd ~/github/reframe-systems/Nucleus7 && lfg "$1"}'
+alias lfg8='(){cd ~/github/reframe-systems/Nucleus8 && lfg "$1"}'
+alias lfg9='(){cd ~/github/reframe-systems/Nucleus9 && lfg "$1"}'
 alias gitclean='git branch --merged origin/main | grep -vE "^\s*(\*|main)" | xargs -n 1 git branch -d';
+
+tmx-sort() {
+  local current_id=$(tmux display-message -p '#{window_id}')
+  local i=1000
+  tmux list-windows -F '#{window_name}|#{window_id}' | sort | while IFS='|' read -r name id; do
+    tmux move-window -s "$id" -t ":$i"
+    i=$((i + 1))
+  done
+  tmux move-window -r
+  tmux select-window -t "$current_id"
+}
 
 # ~/.config git repo health check (pull debounced daily, warnings every shell)
 () {
