@@ -41,6 +41,7 @@ case "$name" in
   Oscars-MacBook-Pro) echo work ;;
   bezi-mbp|bezi-mbp.local) echo home ;;
   homelab-onprem-nuc) echo nuc ;;
+  work) echo nuc-work ;;
   *) echo "$name" ;;
 esac
 '''

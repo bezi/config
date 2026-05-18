@@ -16,3 +16,7 @@ Host homelab
 Host nuc
     Hostname homelab-onprem-nuc
     User bezi
+
+Host nuc-work
+    Hostname bezi-work-pod-01
+    User bezi
