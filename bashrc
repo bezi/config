@@ -25,6 +25,21 @@ alias tmx-name='(){
   tmux rename-window "$name" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off && tmx-sort
 }'
 alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
+
+alias nuc="cd ~/github/reframe-systems/Nucleus"
+alias nuc2="cd ~/github/reframe-systems/Nucleus2"
+alias nuc3="cd ~/github/reframe-systems/Nucleus3"
+alias nuc4="cd ~/github/reframe-systems/Nucleus4"
+alias nuc5="cd ~/github/reframe-systems/Nucleus5"
+alias nuc6="cd ~/github/reframe-systems/Nucleus6"
+alias nuc7="cd ~/github/reframe-systems/Nucleus7"
+alias nuc8="cd ~/github/reframe-systems/Nucleus8"
+alias nuc9="cd ~/github/reframe-systems/Nucleus9"
+alias mito="cd ~/github/reframe-systems/Nucleus/apps/mito";
+alias ui="cd ~/github/reframe-systems/Nucleus/apps/mito_ui";
+alias api="cd ~/github/reframe-systems/Nucleus/apps/mito_api";
+alias infra="cd ~/github/reframe-systems/Nucleus/infra"
+alias scratch="cd ~/scratch"
 alias lfg='(){gg && tmx-name "$1" && cld}'
 alias lfg2='(){cd ~/github/reframe-systems/Nucleus2 && lfg "$1"}'
 alias lfg3='(){cd ~/github/reframe-systems/Nucleus3 && lfg "$1"}'
@@ -84,3 +99,5 @@ gg() {
   fi
   git checkout "$default_branch" && git pull && clear
 }
+
+export PATH="$HOME/.bin:$PATH"
