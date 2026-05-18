@@ -25,12 +25,18 @@ mkdir -p "$HOME/.ssh" "$HOME/.ssh/sockets" && chmod 700 "$HOME/.ssh" "$HOME/.ssh
 ensure_line "Include $CONFIG/ssh_config" "$HOME/.ssh/config"
 chmod 600 "$HOME/.ssh/config"
 
-# tmux plugin manager. After this, open tmux and press <prefix>+I to install plugins.
+# tmux plugin manager and the plugins it manages.
 TPM="$HOME/.tmux/plugins/tpm"
 if [ ! -e "$TPM" ]; then
   git clone --depth 1 https://github.com/tmux-plugins/tpm "$TPM"
 elif [ ! -d "$TPM/.git" ]; then
   echo "bootstrap: warn: $TPM exists but isn't a git checkout, skipping" >&2
+fi
+if command -v tmux >/dev/null 2>&1 && [ -x "$TPM/bin/install_plugins" ]; then
+  "$TPM/bin/install_plugins" >/dev/null || \
+    echo "bootstrap: warn: tmux plugin install failed; run <prefix>+I after starting tmux" >&2
+else
+  echo "bootstrap: tmux not on PATH, skipping plugin install — run <prefix>+I after starting tmux" >&2
 fi
 
 # Git identity. Set only if unset so per-repo / per-machine overrides win.
@@ -39,4 +45,4 @@ git config --global --get user.email          >/dev/null || git config --global 
 git config --global --get core.editor         >/dev/null || git config --global core.editor         nvim
 git config --global --get push.autoSetupRemote >/dev/null || git config --global push.autoSetupRemote true
 
-echo "bootstrap: done. Start tmux and press <prefix>+I to install plugins (default prefix is ctrl-b)."
+echo "bootstrap: done."
