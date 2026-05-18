@@ -17,46 +17,14 @@ git fetch origin
 git checkout --track origin/master
 ```
 
-3. Install and configure [Starship](https://starship.rs/):
+3. Make sure `starship`, `tmux`, `git`, and `nvim` are installed (via `brew`, `nix`, your distro's package manager, etc.), then run the bootstrap script:
 ```sh
-brew install starship
-
-# Add the following to the end of ~/.bashrc:
-eval "$(starship init bash)"
-
-# Add the following to the end of ~/.zshrc:
-eval "$(starship init zsh)"
+~/.config/bootstrap.sh
 ```
+This is idempotent — it wires `~/.bashrc` and `~/.zshrc` to source this repo's `bashrc` and init Starship, clones [TPM](https://github.com/tmux-plugins/tpm) into `~/.tmux/plugins/tpm`, adds `Include ~/.config/ssh_config` to `~/.ssh/config`, and sets the global git identity. Re-run it any time you change machines or want to re-apply.
 
-4. Make sure tmux is installed, then install [TPM](https://github.com/tmux-plugins/tpm):
-```sh
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-```
+On macOS, also add `UseKeychain yes` to `~/.ssh/config` above the include line.
 
-Then, just start tmux and run `prefix + I` to install all the plugins.
+4. Start tmux and press `prefix + I` to install the tmux plugins (default prefix is `ctrl-b`).
 
-5. Install Neovim on your local system, then just open it:
-```sh
-nvim
-```
-
-Plugins are managed with [lazy.nvim](https://github.com/folke/lazy.nvim), which auto-bootstraps on first launch.
-
-6. Make sure your shell config loads `bashrc` in this repo for aliases.
-
-7. Point SSH at the shared config. Create `~/.ssh/config` with:
-```sh
-# macOS only — add this line:
-UseKeychain yes
-
-# All platforms:
-Include ~/.config/ssh_config
-```
-
-8. Run git setup:
-```sh
-git config --global user.name "Oscar Bezi"
-git config --global user.email oscar.bezi@gmail.com
-git config --global core.editor nvim
-git config --global push.autoSetupRemote true
-```
+5. Open `nvim` once to let [lazy.nvim](https://github.com/folke/lazy.nvim) auto-bootstrap its plugins.
