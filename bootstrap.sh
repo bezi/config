@@ -20,7 +20,8 @@ ensure_line '[ -f "$HOME/.config/bashrc" ] && source "$HOME/.config/bashrc"' "$H
 ensure_line 'eval "$(starship init zsh)"'                                    "$HOME/.zshrc"
 
 # SSH includes the shared config (host-specific bits stay in ~/.ssh/config).
-mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
+# ~/.ssh/sockets/ is required by ssh_config's ControlPath multiplexing.
+mkdir -p "$HOME/.ssh" "$HOME/.ssh/sockets" && chmod 700 "$HOME/.ssh" "$HOME/.ssh/sockets"
 ensure_line "Include $CONFIG/ssh_config" "$HOME/.ssh/config"
 chmod 600 "$HOME/.ssh/config"
 
