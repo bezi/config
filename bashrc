@@ -24,7 +24,15 @@ alias tmx-name='(){
   fi
   tmux rename-window "$name" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off && tmx-sort
 }'
-alias cld='ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions'
+alias cld='(){
+  local name=""
+  [[ -n "$TMUX" ]] && name=$(tmux display-message -p "#W")
+  if [[ -n "$name" ]]; then
+    ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions --remote-control "$name"
+  else
+    ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions --remote-control
+  fi
+}'
 
 alias nuc="cd ~/github/reframe-systems/Nucleus"
 alias nuc2="cd ~/github/reframe-systems/Nucleus2"
