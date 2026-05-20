@@ -28,9 +28,9 @@ alias cld='(){
   local name=""
   [[ -n "$TMUX" ]] && name=$(tmux display-message -p "#W")
   if [[ -n "$name" ]]; then
-    ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions --remote-control "$name"
+    ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions --remote-control "$name" "$@"
   else
-    ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions --remote-control
+    ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions --remote-control "$@"
   fi
 }'
 
