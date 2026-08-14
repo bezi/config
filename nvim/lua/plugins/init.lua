@@ -33,15 +33,47 @@ return {
 	},
 
 	-- treesitter (main branch required for Neovim 0.12+)
+	--
+	-- The main branch has no `ensure_install` or `auto_install` option; the only
+	-- option is `install_dir`. Parsers AND their highlight queries are installed
+	-- together into that directory, and `install_dir` must be passed explicitly
+	-- so that setup() prepends it to the runtimepath — lazy.nvim resets the
+	-- runtimepath and drops the default `stdpath("data")/site` entry.
 	{
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
-		main = "nvim-treesitter",
-		opts = {
-			ensure_install = { "vimdoc", "c", "lua", "vim", "query", "rust" },
-			auto_install = true,
-		},
+		config = function()
+			local treesitter = require("nvim-treesitter")
+
+			treesitter.setup({
+				install_dir = vim.fn.stdpath("data") .. "/site",
+			})
+
+			-- Installs only what is missing, so this is cheap on later starts.
+			treesitter.install({
+				"bash",
+				"c",
+				"css",
+				"dockerfile",
+				"go",
+				"html",
+				"javascript",
+				"json",
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"query",
+				"rust",
+				"toml",
+				"tsx",
+				"typescript",
+				"vim",
+				"vimdoc",
+				"yaml",
+			})
+		end,
 	},
 
 	-- Run linters
