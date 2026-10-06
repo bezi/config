@@ -59,6 +59,7 @@ alias lfg8='(){cd ~/github/reframe-systems/Nucleus8 && lfg "$1"}'
 alias lfg9='(){cd ~/github/reframe-systems/Nucleus9 && lfg "$1"}'
 alias gitclean='git branch --merged origin/main | grep -vE "^\s*(\*|main)" | xargs -n 1 git branch -d';
 alias coffee='clear && tmx-name ☕ && echo "Caffeinating..." && caffeinate -dims'
+alias ghp='nuc && tmx-name 🎉 && gg && cld /github-party'
 
 tmx-sort() {
   local current_id=$(tmux display-message -p '#{window_id}')
