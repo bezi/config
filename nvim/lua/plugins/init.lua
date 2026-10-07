@@ -14,7 +14,7 @@ return {
 	-- Finder plugin
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "0.1.3",
+		version = "0.2.x",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 
