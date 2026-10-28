@@ -121,10 +121,7 @@ return {
 			local on_attach = function(client, bufnr)
 				local bufopts = { buffer = bufnr, remap = false }
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-				vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-				vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, bufopts)
+				vim.keymap.set("n", "gl", vim.diagnostic.open_float, bufopts)
 			end
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
