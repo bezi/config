@@ -24,6 +24,9 @@ return {
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 	},
 
+	-- Route vim.ui.select (code actions, etc.) through telescope
+	{ "nvim-telescope/telescope-ui-select.nvim" },
+
 	-- Color scheme
 	{
 		"rebelot/kanagawa.nvim",

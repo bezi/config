@@ -13,9 +13,23 @@ require("conform").setup({
 		nix = { "nixfmt" },
 		["*"] = { "trim_whitespace", "trim_newlines" },
 	},
-	format_on_save = {
-		-- These options will be passed to conform.format()
-		timeout_ms = 500,
-		lsp_fallback = true,
+	formatters = {
+		rustfmt = {
+			-- imports_granularity is nightly-only; merge each crate's imports into one `use`.
+			options = { nightly = true },
+			append_args = { "--config", "imports_granularity=Crate" },
+		},
 	},
+	format_on_save = function(bufnr)
+		-- Strip unused imports before rustfmt so it tidies up after them.
+		if vim.bo[bufnr].filetype == "rust" then
+			require("bezi.rust").remove_unused_imports(bufnr)
+		end
+
+		-- These options will be passed to conform.format()
+		return {
+			timeout_ms = 500,
+			lsp_fallback = true,
+		}
+	end,
 })

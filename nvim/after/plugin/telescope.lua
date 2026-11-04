@@ -1,3 +1,12 @@
+local telescope = require("telescope")
+telescope.setup({
+	extensions = {
+		["ui-select"] = require("telescope.themes").get_cursor(),
+	},
+})
+telescope.load_extension("fzf")
+telescope.load_extension("ui-select")
+
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
