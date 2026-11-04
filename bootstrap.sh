@@ -13,6 +13,16 @@ ensure_line() {
   grep -qxF -- "$line" "$file" || printf '\n%s\n' "$line" >>"$file"
 }
 
+# Symlink a harness's instruction file to the shared AGENTS.md. Replaces a
+# plain file or stale link; leaves a correct link alone.
+ensure_link() {
+  local target=$1 link=$2
+  mkdir -p "$(dirname "$link")"
+  [ "$(readlink "$link" 2>/dev/null)" = "$target" ] && return
+  rm -f "$link"
+  ln -s "$target" "$link"
+}
+
 # Shell rc files: source the shared bashrc and init starship.
 ensure_line '[ -f "$HOME/.config/bashrc" ] && source "$HOME/.config/bashrc"' "$HOME/.bashrc"
 ensure_line 'eval "$(starship init bash)"'                                   "$HOME/.bashrc"
@@ -38,6 +48,11 @@ if command -v tmux >/dev/null 2>&1 && [ -x "$TPM/bin/install_plugins" ]; then
 else
   echo "bootstrap: tmux not on PATH, skipping plugin install — run <prefix>+I after starting tmux" >&2
 fi
+
+# Agent instructions: one shared AGENTS.md, symlinked to each harness's
+# expected path so pi, Claude Code, and others all read the same file.
+ensure_link "$CONFIG/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+ensure_link "$CONFIG/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
 # Git identity. Set only if unset so per-repo / per-machine overrides win.
 git config --global --get user.name           >/dev/null || git config --global user.name           "Oscar Bezi"
