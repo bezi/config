@@ -50,9 +50,8 @@ else
 fi
 
 # Agent instructions: one shared AGENTS.md, symlinked to each harness's
-# expected path so pi, Claude Code, and others all read the same file.
+# expected path so Claude Code and others all read the same file.
 ensure_link "$CONFIG/AGENTS.md" "$HOME/.claude/CLAUDE.md"
-ensure_link "$CONFIG/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
 
 # Git identity. Set only if unset so per-repo / per-machine overrides win.
 git config --global --get user.name           >/dev/null || git config --global user.name           "Oscar Bezi"
