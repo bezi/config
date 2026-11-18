@@ -22,11 +22,11 @@ alias tmx-name='(){
   elif [[ "$PWD" == */Nucleus/* || "$PWD" == */Nucleus ]]; then
     name="1-${name}"
   fi
-  tmux rename-window "$name" && tmux set-option -w allow-rename off && tmux set-option -w automatic-rename off && tmx-sort
+  tmux rename-window -t "$TMUX_PANE" "$name" && tmux set-option -w -t "$TMUX_PANE" allow-rename off && tmux set-option -w -t "$TMUX_PANE" automatic-rename off && tmx-sort
 }'
 alias cld='(){
   local name=""
-  [[ -n "$TMUX" ]] && name=$(tmux display-message -p "#W")
+  [[ -n "$TMUX" ]] && name=$(tmux display-message -p -t "$TMUX_PANE" "#W")
   if [[ -n "$name" ]]; then
     ENABLE_TOOL_SEARCH=false claude --dangerously-skip-permissions --remote-control "$name" "$@"
   else
@@ -48,15 +48,31 @@ alias ui="cd ~/github/reframe-systems/Nucleus/apps/mito_ui";
 alias api="cd ~/github/reframe-systems/Nucleus/apps/mito_api";
 alias infra="cd ~/github/reframe-systems/Nucleus/infra"
 alias scratch="cd ~/scratch"
-alias lfg='(){gg && tmx-name "$1" && cld}'
-alias lfg2='(){cd ~/github/reframe-systems/Nucleus2 && lfg "$1"}'
-alias lfg3='(){cd ~/github/reframe-systems/Nucleus3 && lfg "$1"}'
-alias lfg4='(){cd ~/github/reframe-systems/Nucleus4 && lfg "$1"}'
-alias lfg5='(){cd ~/github/reframe-systems/Nucleus5 && lfg "$1"}'
-alias lfg6='(){cd ~/github/reframe-systems/Nucleus6 && lfg "$1"}'
-alias lfg7='(){cd ~/github/reframe-systems/Nucleus7 && lfg "$1"}'
-alias lfg8='(){cd ~/github/reframe-systems/Nucleus8 && lfg "$1"}'
-alias lfg9='(){cd ~/github/reframe-systems/Nucleus9 && lfg "$1"}'
+alias lfg='(){local name="$1"; shift; gg && tmx-name "$name" && if (( $# )); then cld "$*"; else cld; fi}'
+alias lfg2='(){cd ~/github/reframe-systems/Nucleus2 && lfg "$@"}'
+alias lfg3='(){cd ~/github/reframe-systems/Nucleus3 && lfg "$@"}'
+alias lfg4='(){cd ~/github/reframe-systems/Nucleus4 && lfg "$@"}'
+alias lfg5='(){cd ~/github/reframe-systems/Nucleus5 && lfg "$@"}'
+alias lfg6='(){cd ~/github/reframe-systems/Nucleus6 && lfg "$@"}'
+alias lfg7='(){cd ~/github/reframe-systems/Nucleus7 && lfg "$@"}'
+alias lfg8='(){cd ~/github/reframe-systems/Nucleus8 && lfg "$@"}'
+alias lfg9='(){cd ~/github/reframe-systems/Nucleus9 && lfg "$@"}'
+# Run lfg<n> for the lowest clone in 2-9 with no "<n>-" tmux window open.
+# Claims the clone by renaming this window first, so back-to-back launches
+# don't pick the same one.
+alias lfgX='(){
+  local busy=$(tmux list-windows -a -F "#W" 2>/dev/null)
+  local n
+  for n in {2..9}; do
+    if ! grep -q "^${n}-" <<< "$busy"; then
+      [[ -n "$TMUX" ]] && tmux rename-window -t "$TMUX_PANE" "${n}-$1"
+      eval "lfg${n} \"\$@\""
+      return
+    fi
+  done
+  echo "lfgX: clones 2-9 are all busy" >&2
+  return 1
+}'
 alias gitclean='git branch --merged origin/main | grep -vE "^\s*(\*|main)" | xargs -n 1 git branch -d';
 alias coffee='clear && tmx-name ☕ && echo "Caffeinating..." && caffeinate -dims'
 alias ghp='nuc && tmx-name 🎉 && gg && cld /github-party'
